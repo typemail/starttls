@@ -1,8 +1,8 @@
 import { createServer, Socket, connect } from 'net';
-import { SecureContextOptions } from 'tls';
+import { TLSSocket, SecureContextOptions } from 'tls';
 import { readFileSync } from 'fs';
 
-import { isUpgraded, upgradeSocket } from '../src';
+import { upgradeSocket, isUpgraded } from '../src';
 
 const options: SecureContextOptions = {
   key: readFileSync('./__tests__/cert/server.key'),
@@ -121,5 +121,15 @@ describe('upgradeSocket', () => {
       true,
       done
     );
+  });
+});
+
+describe('isUpgraded', () => {
+  it('returns false for a new Socket', () => {
+    expect(isUpgraded(new Socket())).toBe(false);
+  });
+
+  it('returns true for a new TLSSocket', () => {
+    expect(isUpgraded(new TLSSocket(new Socket()))).toBe(true);
   });
 });
