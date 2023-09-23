@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-<img alt="workflow" src="https://img.shields.io/github/workflow/status/typemail/starttls/Tests">
+<img alt="workflow" src=" https://img.shields.io/github/actions/workflow/status/typemail/starttls/tests.yml?branch=main">
 <a href="https://npmjs.com/package/@typemail/starttls">
 <img alt="npm" src="https://img.shields.io/npm/v/@typemail/starttls">
 <img alt="npm" src="https://img.shields.io/npm/dw/@typemail/starttls">
