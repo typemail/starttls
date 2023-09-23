@@ -9,3 +9,4 @@ logo.png
 .github
 coverage
 vite*js
+vitest.config.ts
