@@ -12,11 +12,10 @@ const options: SecureContextOptions = {
 const runTest = (
   port: number,
   clientFactory: (port: number) => Socket,
-  forceError: boolean,
-  done: () => void
-) => {
-  const receivedTest = jest.fn();
-  const receivedSecure = jest.fn();
+  forceError: boolean
+): Promise<boolean> => {
+  const receivedTest = vi.fn();
+  const receivedSecure = vi.fn();
 
   const server = createServer(socket => {
     expect(isUpgraded(socket)).toBe(false);
@@ -71,17 +70,19 @@ const runTest = (
     }
   });
 
-  client.on('close', () => {
-    expect(receivedTest).toBeCalledTimes(1);
-    expect(receivedSecure).toBeCalledTimes(forceError ? 0 : 1);
-    server.close();
+  return new Promise(resolve => {
+    client.on('close', () => {
+      expect(receivedTest).toBeCalledTimes(1);
+      expect(receivedSecure).toBeCalledTimes(forceError ? 0 : 1);
+      server.close();
 
-    done();
+      resolve(true);
+    });
   });
 };
 
 describe('upgradeSocket', () => {
-  it('upgrades when client is created with connect', done => {
+  it('upgrades when client is created with connect', () =>
     runTest(
       2222,
       port =>
@@ -89,12 +90,10 @@ describe('upgradeSocket', () => {
           host: '127.0.0.1',
           port: port,
         }),
-      false,
-      done
-    );
-  });
+      false
+    ));
 
-  it('upgrades when client is created with new Socket', done => {
+  it('upgrades when client is created with new Socket', () =>
     runTest(
       2223,
       port => {
@@ -105,12 +104,10 @@ describe('upgradeSocket', () => {
         });
         return client;
       },
-      false,
-      done
-    );
-  });
+      false
+    ));
 
-  it('handles errors properly', done => {
+  it('handles errors properly', () =>
     runTest(
       2222,
       port =>
@@ -118,10 +115,8 @@ describe('upgradeSocket', () => {
           host: '127.0.0.1',
           port: port,
         }),
-      true,
-      done
-    );
-  });
+      true
+    ));
 });
 
 describe('isUpgraded', () => {

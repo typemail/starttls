@@ -7,3 +7,5 @@ yarn.lock
 tsconfig.json
 logo.png
 .github
+coverage
+vite*js
