@@ -2,7 +2,7 @@ import { createServer, Socket, connect } from 'net';
 import { TLSSocket, SecureContextOptions } from 'tls';
 import { readFileSync } from 'fs';
 
-import { upgradeSocket, isUpgraded } from '../src';
+import { upgradeSocket, isUpgraded } from '../src/index.js';
 
 const options: SecureContextOptions = {
   key: readFileSync('./__tests__/cert/server.key'),
