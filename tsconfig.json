@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "esModuleInterop": false,
     "declaration": true,
     "outDir": "./lib",
-    "lib": ["ESNext"],
+    "lib": ["ES2020", "DOM"],
     "strict": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*", "src/run.ts"]
+  "exclude": ["node_modules", "**/__tests__/*"]
 }
