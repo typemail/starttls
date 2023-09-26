@@ -1,6 +1,6 @@
 {
   "name": "@typemail/starttls",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "TypeScript library for easy socket upgrades (STARTTLS).",
   "type": "module",
   "main": "./lib/cjs/index.js",
